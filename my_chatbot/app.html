@@ -1,0 +1,425 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Silver Sports</title>
+    
+    <!-- Tailwind CSS (Styling) -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- React & ReactDOM (The Engine) -->
+    <script crossorigin src="https://unpkg.com/react@18/umd/react.development.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+    
+    <!-- Babel (To understand the code) -->
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+
+    <!-- Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+    
+    <style>
+        body { font-family: 'Inter', sans-serif; background-color: #f8fafc; }
+        .pb-safe { padding-bottom: env(safe-area-inset-bottom); }
+        /* Hide scrollbar for clean look */
+        ::-webkit-scrollbar { width: 0px; background: transparent; }
+    </style>
+</head>
+<body>
+
+<div id="root"></div>
+
+<script type="text/babel">
+
+    // --- ICONS (Inline SVGs to avoid complex installations) ---
+    const Icon = ({ path, size = 24, className = "" }) => (
+        <svg xmlns="http://www.w3.org/2000/svg" width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className}>
+            {path}
+        </svg>
+    );
+
+    const Mic = (p) => <Icon {...p} path={<><path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"/><path d="M19 10v2a7 7 0 0 1-14 0v-2"/><line x1="12" y1="19" x2="12" y2="23"/><line x1="8" y1="23" x2="16" y2="23"/></>} />;
+    const Home = (p) => <Icon {...p} path={<><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></>} />;
+    const Ticket = (p) => <Icon {...p} path={<><path d="M2 9a3 3 0 0 1 0 6v2a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2v-2a3 3 0 0 1 0-6V7a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2z"/></>} />;
+    const User = (p) => <Icon {...p} path={<><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></>} />;
+    const Volume2 = (p) => <Icon {...p} path={<><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14"/><path d="M15.54 8.46a5 5 0 0 1 0 7.07"/></>} />;
+    const ArrowLeft = (p) => <Icon {...p} path={<><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></>} />;
+    const MessageCircle = (p) => <Icon {...p} path={<><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></>} />;
+    const CheckCircle = (p) => <Icon {...p} path={<><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></>} />;
+    const XCircle = (p) => <Icon {...p} path={<><circle cx="12" cy="12" r="10"/><line x1="15" y1="9" x2="9" y2="15"/><line x1="9" y1="9" x2="15" y2="15"/></>} />;
+    const Users = (p) => <Icon {...p} path={<><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></>} />;
+    const CreditCard = (p) => <Icon {...p} path={<><rect x="1" y="4" width="22" height="16" rx="2" ry="2"/><line x1="1" y1="10" x2="23" y2="10"/></>} />;
+    const MapPin = (p) => <Icon {...p} path={<><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></>} />;
+
+
+    // --- MOVED CHAT SCREEN OUTSIDE APP TO FIX FOCUS ISSUE ---
+    const { useState, useEffect, useRef } = React;
+
+    const ChatScreen = ({ chatHistory, inputText, setInputText, handleSendMessage }) => {
+        const bottomRef = useRef(null);
+        useEffect(() => { bottomRef.current?.scrollIntoView({ behavior: 'smooth' }); }, [chatHistory]);
+
+        return (
+            <div className="flex flex-col h-[calc(100vh-80px)] bg-slate-50">
+                <div className="flex-1 overflow-y-auto p-4 space-y-4">
+                    {chatHistory.map((msg, idx) => (
+                        <div key={idx} className={`flex ${msg.sender === 'user' ? 'justify-end' : 'justify-start'}`}>
+                            <div className={`max-w-[80%] p-6 rounded-3xl text-xl font-medium ${msg.sender === 'user' ? 'bg-indigo-600 text-white rounded-br-none' : 'bg-white border-2 border-slate-200 text-slate-800 rounded-bl-none'}`}>
+                                {msg.text}
+                            </div>
+                        </div>
+                    ))}
+                    <div ref={bottomRef} />
+                </div>
+                <div className="p-4 bg-white border-t border-slate-200">
+                    <div className="flex gap-2">
+                        <input 
+                            type="text" 
+                            value={inputText} 
+                            onChange={(e) => setInputText(e.target.value)} 
+                            onKeyPress={(e) => e.key === 'Enter' && handleSendMessage()} 
+                            placeholder="Type here..." 
+                            className="flex-1 bg-slate-100 p-4 rounded-2xl text-xl border-2 border-slate-200 focus:border-indigo-500 outline-none" 
+                        />
+                        <button onClick={() => handleSendMessage()} className="bg-indigo-600 text-white p-4 rounded-2xl">
+                            <ArrowLeft size={32} className="rotate-180" />
+                        </button>
+                    </div>
+                    <div className="mt-4 flex justify-center">
+                        <button 
+                            onClick={() => handleSendMessage("I need help buying tickets")} 
+                            className="bg-orange-100 text-orange-800 px-6 py-3 rounded-full font-bold flex items-center gap-2"
+                        >
+                            <Mic size={24} /> Tap to Speak
+                        </button>
+                    </div>
+                </div>
+            </div>
+        );
+    };
+
+
+    // --- MAIN APP COMPONENT ---
+    function App() {
+        const [currentScreen, setCurrentScreen] = useState('home');
+        const [selectedEvent, setSelectedEvent] = useState(null);
+        const [ticketCount, setTicketCount] = useState(1);
+        const [paymentMethod, setPaymentMethod] = useState(null);
+        const [showConfirmModal, setShowConfirmModal] = useState(false);
+        const [myTickets, setMyTickets] = useState([]);
+        const [chatHistory, setChatHistory] = useState([
+            { sender: 'ai', text: 'Hello! I am your helper. Press the microphone to speak or type below.' }
+        ]);
+        const [conversationId, setConversationId] = useState('new'); 
+        const [isLinked, setIsLinked] = useState(false);
+        const [inputText, setInputText] = useState('');
+        const [voiceActive, setVoiceActive] = useState(true);
+
+        const events = [
+            { id: 1, sport: 'Baseball', team: 'City Tigers vs Bears', date: 'Tomorrow, 2:00 PM', price: 25, location: 'Central Stadium' },
+            { id: 2, sport: 'Soccer', team: 'United FC vs City', date: 'Sunday, 4:00 PM', price: 30, location: 'North Field' },
+            { id: 3, sport: 'Basketball', team: 'Hoops vs Nets', date: 'Nov 12, 7:00 PM', price: 40, location: 'Arena A' },
+        ];
+
+        const speak = (text) => {
+            if (!voiceActive) return;
+            window.speechSynthesis.cancel();
+            const utterance = new SpeechSynthesisUtterance(text);
+            utterance.rate = 0.9;
+            window.speechSynthesis.speak(utterance);
+        };
+
+        useEffect(() => {
+            if(currentScreen === 'home') speak("Welcome to Silver Sports. How can I help you today?");
+            return () => window.speechSynthesis.cancel();
+        }, []);
+
+        const goBack = () => {
+            if (currentScreen === 'checkout') setCurrentScreen('eventDetails');
+            else if (currentScreen === 'eventDetails') setCurrentScreen('events');
+            else setCurrentScreen('home');
+        };
+
+        const handleEventSelect = (event) => {
+            setSelectedEvent(event);
+            setCurrentScreen('eventDetails');
+            speak(`You selected ${event.sport}. The price is ${event.price} dollars.`);
+        };
+
+        const handleCheckoutStart = () => {
+            setCurrentScreen('checkout');
+            speak("Please choose how you want to pay. You can pay now, or pay later at the stadium.");
+        };
+
+        const handlePurchaseAttempt = () => {
+            setShowConfirmModal(true);
+            speak("Are you sure you want to get these tickets? Please confirm.");
+        };
+
+        const confirmPurchase = () => {
+            const newTicket = {
+                ...selectedEvent,
+                count: ticketCount,
+                purchaseId: Math.floor(Math.random() * 10000),
+                status: paymentMethod === 'offline' ? 'Reserved (Pay at Counter)' : 'Paid',
+                isGift: false
+            };
+            setMyTickets([...myTickets, newTicket]);
+            setShowConfirmModal(false);
+            setCurrentScreen('success');
+            speak("Success! Your tickets are ready. You can find them in the My Tickets folder.");
+        };
+
+        const handleGuardianLink = () => {
+            setIsLinked(true);
+            speak("Your account is now linked to your guardian, Sarah.");
+        };
+
+        const sendTicketToGuardian = (ticketId) => {
+            setMyTickets(myTickets.map(t => 
+                t.purchaseId === ticketId ? { ...t, isGift: true } : t
+            ));
+            speak("Ticket sent to Sarah.");
+        };
+
+        // Updated to accept an override text (for the "Tap to Speak" button)
+        const handleSendMessage = async (textOverride = null) => {
+            const textToSend = textOverride || inputText;
+            if (!textToSend || !textToSend.trim()) return;
+            
+            // 1. Add User Message
+            const userMsg = { sender: 'user', text: textToSend };
+            const updatedHistory = [...chatHistory, userMsg];
+            setChatHistory(updatedHistory);
+            setInputText(''); // Clear input
+
+            // 2. Send to Backend
+            try {
+                // FIXED: Added http://localhost:3000 so it works even if opened as a file
+                const response = await fetch(`http://localhost:3000/message/${conversationId}`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ message: textToSend })
+                });
+
+                if (!response.ok) throw new Error('Server error');
+                
+                const data = await response.json();
+                
+                if (data.conversationId) setConversationId(data.conversationId);
+
+                setChatHistory(prev => [...prev, { sender: 'ai', text: data.response }]);
+                speak(data.response);
+
+            } catch (error) {
+                console.error(error);
+                const errorMsg = "I'm having trouble reaching the server. Please try again.";
+                setChatHistory(prev => [...prev, { sender: 'ai', text: errorMsg }]);
+                speak(errorMsg);
+            }
+        };
+
+        // --- COMPONENTS ---
+
+        const BigButton = ({ onClick, icon: Icon, label, color = "bg-blue-600", subLabel }) => (
+            <button onClick={onClick} className={`${color} w-full text-white p-6 rounded-3xl shadow-lg transform transition active:scale-95 flex items-center justify-between mb-6`}>
+                <div className="flex items-center gap-6">
+                    {Icon && <Icon size={48} />}
+                    <div className="text-left">
+                        <div className="text-2xl font-bold">{label}</div>
+                        {subLabel && <div className="text-lg opacity-90 font-medium">{subLabel}</div>}
+                    </div>
+                </div>
+                <div className="bg-white/20 p-2 rounded-full">
+                    <ArrowLeft size={32} className="rotate-180" />
+                </div>
+            </button>
+        );
+
+        const Header = ({ title }) => (
+            <div className="bg-white sticky top-0 z-10 p-4 shadow-sm flex items-center justify-between border-b-2 border-slate-200">
+                <div className="flex items-center gap-3">
+                    {currentScreen !== 'home' && (
+                        <button onClick={goBack} className="bg-slate-100 p-3 rounded-xl border-2 border-slate-300 active:bg-slate-200">
+                            <ArrowLeft size={32} className="text-slate-800" />
+                        </button>
+                    )}
+                    <h1 className="text-3xl font-bold text-slate-800 tracking-tight">{title}</h1>
+                </div>
+                <button onClick={() => setVoiceActive(!voiceActive)} className={`p-3 rounded-full ${voiceActive ? 'bg-green-100 text-green-700' : 'bg-slate-100 text-slate-400'}`}>
+                    <Volume2 size={32} />
+                </button>
+            </div>
+        );
+
+        // --- SCREENS ---
+
+        const HomeScreen = () => (
+            <div className="p-6 flex flex-col h-full bg-slate-50">
+                <div className="mb-8">
+                    <h2 className="text-4xl font-extrabold text-slate-900 mb-2">Hello!</h2>
+                    <p className="text-2xl text-slate-600">What would you like to do?</p>
+                </div>
+                <BigButton onClick={() => setCurrentScreen('events')} icon={Ticket} label="Buy Tickets" subLabel="Sports games nearby" color="bg-indigo-600" />
+                <BigButton onClick={() => setCurrentScreen('myTickets')} icon={User} label="My Tickets" subLabel="View purchased tickets" color="bg-emerald-600" />
+                <BigButton onClick={() => setCurrentScreen('aiHelp')} icon={MessageCircle} label="Ask Helper" subLabel="I can answer questions" color="bg-orange-500" />
+                <BigButton onClick={() => setCurrentScreen('guardian')} icon={Users} label="Family Link" subLabel={isLinked ? "Linked to Sarah" : "Connect to Guardian"} color="bg-pink-600" />
+            </div>
+        );
+
+        const EventListScreen = () => (
+            <div className="p-4 bg-slate-50 min-h-screen pb-32">
+                <div className="space-y-6">
+                    {events.map(event => (
+                        <div key={event.id} onClick={() => handleEventSelect(event)} className="bg-white rounded-3xl p-6 shadow-md border-2 border-slate-200 active:border-indigo-600 cursor-pointer">
+                            <div className="flex justify-between items-start mb-4">
+                                <span className="bg-indigo-100 text-indigo-800 px-4 py-2 rounded-xl text-xl font-bold">{event.sport}</span>
+                                <span className="text-3xl font-bold text-slate-900">${event.price}</span>
+                            </div>
+                            <h3 className="text-3xl font-bold text-slate-800 mb-2">{event.team}</h3>
+                            <div className="flex items-center gap-2 text-xl text-slate-600 mb-2">
+                                <CreditCard size={24} /> <span>{event.date}</span>
+                            </div>
+                            <div className="flex items-center gap-2 text-xl text-slate-600">
+                                <MapPin size={24} /> <span>{event.location}</span>
+                            </div>
+                        </div>
+                    ))}
+                </div>
+            </div>
+        );
+
+        const EventDetailScreen = () => (
+            <div className="p-6 bg-slate-50 min-h-screen flex flex-col">
+                <div className="bg-white p-6 rounded-3xl shadow-sm border border-slate-200 mb-6 text-center">
+                    <h2 className="text-3xl font-bold text-slate-900 mb-4">{selectedEvent.team}</h2>
+                    <p className="text-2xl text-slate-600 mb-2">{selectedEvent.date}</p>
+                    <p className="text-2xl text-slate-600">{selectedEvent.location}</p>
+                </div>
+                <div className="bg-white p-6 rounded-3xl shadow-sm border border-slate-200 mb-8">
+                    <label className="text-2xl font-bold text-slate-800 mb-6 block text-center">How many tickets?</label>
+                    <div className="flex items-center justify-between px-4">
+                        <button onClick={() => setTicketCount(Math.max(1, ticketCount - 1))} className="w-20 h-20 rounded-full bg-slate-200 text-slate-800 flex items-center justify-center text-4xl font-bold">-</button>
+                        <span className="text-5xl font-bold text-indigo-700">{ticketCount}</span>
+                        <button onClick={() => setTicketCount(ticketCount + 1)} className="w-20 h-20 rounded-full bg-indigo-100 text-indigo-800 flex items-center justify-center text-4xl font-bold">+</button>
+                    </div>
+                </div>
+                <button onClick={handleCheckoutStart} className="w-full bg-indigo-600 text-white text-3xl font-bold py-6 rounded-3xl shadow-xl mt-auto">Next Step</button>
+            </div>
+        );
+
+        const CheckoutScreen = () => (
+            <div className="p-6 bg-slate-50 min-h-screen flex flex-col">
+                <div className="mb-8">
+                    <h3 className="text-2xl font-bold text-slate-800 mb-4">Total to Pay:</h3>
+                    <div className="text-5xl font-extrabold text-green-700">${selectedEvent.price * ticketCount}</div>
+                </div>
+                <h3 className="text-2xl font-bold text-slate-800 mb-4">Payment Method</h3>
+                <div className="space-y-4 mb-8">
+                    <button onClick={() => setPaymentMethod('offline')} className={`w-full p-6 rounded-3xl border-4 flex items-center gap-4 text-left transition-all ${paymentMethod === 'offline' ? 'border-green-500 bg-green-50' : 'border-slate-200 bg-white'}`}>
+                        <div className="bg-green-100 p-3 rounded-full"><Ticket size={40} className="text-green-700" /></div>
+                        <div><div className="text-2xl font-bold text-slate-900">Pay Offline</div><div className="text-lg text-slate-600">Pay cash at the stadium</div></div>
+                        {paymentMethod === 'offline' && <CheckCircle size={40} className="text-green-600 ml-auto" />}
+                    </button>
+                    <button onClick={() => setPaymentMethod('online')} className={`w-full p-6 rounded-3xl border-4 flex items-center gap-4 text-left transition-all ${paymentMethod === 'online' ? 'border-indigo-500 bg-indigo-50' : 'border-slate-200 bg-white'}`}>
+                        <div className="bg-indigo-100 p-3 rounded-full"><CreditCard size={40} className="text-indigo-700" /></div>
+                        <div><div className="text-2xl font-bold text-slate-900">Pay Card Now</div><div className="text-lg text-slate-600">Use credit card securely</div></div>
+                        {paymentMethod === 'online' && <CheckCircle size={40} className="text-indigo-600 ml-auto" />}
+                    </button>
+                </div>
+                <button disabled={!paymentMethod} onClick={handlePurchaseAttempt} className={`w-full text-white text-3xl font-bold py-6 rounded-3xl shadow-xl mt-auto ${!paymentMethod ? 'bg-slate-300' : 'bg-indigo-600'}`}>Buy Tickets</button>
+            </div>
+        );
+
+        const SuccessScreen = () => (
+            <div className="p-6 flex flex-col items-center justify-center min-h-screen bg-green-50 text-center">
+                <div className="bg-white p-4 rounded-full mb-6 shadow-sm"><CheckCircle size={100} className="text-green-600" /></div>
+                <h2 className="text-4xl font-extrabold text-slate-900 mb-4">Tickets Confirmed!</h2>
+                <p className="text-2xl text-slate-600 mb-12">{paymentMethod === 'offline' ? "Please pay at the ticket counter when you arrive." : "Your payment was successful."}</p>
+                <button onClick={() => setCurrentScreen('home')} className="w-full bg-slate-900 text-white text-2xl font-bold py-6 rounded-3xl shadow-lg">Go Home</button>
+            </div>
+        );
+
+        const MyTicketsScreen = () => (
+            <div className="p-6 bg-slate-50 min-h-screen">
+                {myTickets.length === 0 ? <div className="text-center mt-20"><p className="text-2xl text-slate-400">No tickets yet.</p></div> : 
+                    myTickets.map((ticket, idx) => (
+                        <div key={idx} className="bg-white border-2 border-slate-200 rounded-3xl p-6 mb-6 shadow-sm relative overflow-hidden">
+                            <div className="flex justify-between items-start mb-4">
+                                <div><h3 className="text-2xl font-bold text-slate-900">{ticket.team}</h3><p className="text-xl text-slate-600">{ticket.date}</p></div>
+                                <span className={`px-3 py-1 rounded-lg font-bold ${ticket.isGift ? 'bg-pink-100 text-pink-700' : 'bg-slate-100 text-slate-700'}`}>x{ticket.count}</span>
+                            </div>
+                            <div className="bg-slate-100 p-4 rounded-xl mb-4">
+                                <p className="text-lg font-bold text-slate-500 uppercase">Status</p>
+                                <p className={`text-xl font-bold ${ticket.status.includes('Paid') ? 'text-green-600' : 'text-orange-600'}`}>{ticket.isGift ? 'Sent to Guardian' : ticket.status}</p>
+                                <p className="text-lg text-slate-400 mt-2">ID: #{ticket.purchaseId}</p>
+                            </div>
+                            {isLinked && !ticket.isGift && (
+                                <button onClick={() => sendTicketToGuardian(ticket.purchaseId)} className="w-full py-4 bg-pink-100 text-pink-800 font-bold rounded-2xl flex items-center justify-center gap-2 text-xl"><Users size={24} /> Send to Family</button>
+                            )}
+                        </div>
+                    ))
+                }
+            </div>
+        );
+
+        const GuardianScreen = () => (
+            <div className="p-6 bg-slate-50 min-h-screen text-center">
+                <div className="bg-white p-8 rounded-3xl shadow-sm border border-slate-200 mb-8">
+                    <div className="w-24 h-24 bg-pink-100 rounded-full flex items-center justify-center mx-auto mb-4"><Users size={48} className="text-pink-600" /></div>
+                    <h2 className="text-3xl font-bold text-slate-900 mb-2">{isLinked ? "Sarah (Daughter)" : "Connect to Family"}</h2>
+                    <p className="text-xl text-slate-600">{isLinked ? "Account is linked. You can share tickets instantly." : "Link accounts to send tickets easily."}</p>
+                </div>
+                {!isLinked ? <button onClick={handleGuardianLink} className="w-full bg-pink-600 text-white text-2xl font-bold py-6 rounded-3xl shadow-lg">Link Account</button> : <div className="bg-green-100 p-6 rounded-3xl border-2 border-green-200"><p className="text-2xl font-bold text-green-800 flex items-center justify-center gap-2"><CheckCircle /> Active</p></div>}
+            </div>
+        );
+
+        const ConfirmModal = () => {
+            if (!showConfirmModal) return null;
+            return (
+                <div className="fixed inset-0 bg-black/60 z-50 flex items-center justify-center p-4 backdrop-blur-sm">
+                    <div className="bg-white w-full max-w-md rounded-3xl p-8 text-center shadow-2xl">
+                        <div className="bg-yellow-100 w-20 h-20 rounded-full flex items-center justify-center mx-auto mb-6"><Ticket size={40} className="text-yellow-700" /></div>
+                        <h2 className="text-3xl font-bold text-slate-900 mb-4">Confirm Purchase?</h2>
+                        <p className="text-xl text-slate-600 mb-8">Buying <strong>{ticketCount}</strong> ticket(s) for <br/><span className="font-bold text-indigo-700">{selectedEvent?.team}</span>.</p>
+                        <div className="space-y-4">
+                            <button onClick={confirmPurchase} className="w-full bg-green-600 text-white text-2xl font-bold py-5 rounded-2xl shadow-md border-b-4 border-green-800 active:border-b-0 active:translate-y-1">YES, Buy Now</button>
+                            <button onClick={() => setShowConfirmModal(false)} className="w-full bg-white text-slate-700 border-2 border-slate-300 text-2xl font-bold py-5 rounded-2xl">No, Cancel</button>
+                        </div>
+                    </div>
+                </div>
+            );
+        };
+
+        return (
+            <div className="font-sans max-w-lg mx-auto bg-white min-h-screen shadow-2xl overflow-hidden relative selection:bg-indigo-100">
+                <Header title={currentScreen === 'home' ? 'Silver Sports' : currentScreen === 'aiHelp' ? 'Helper' : currentScreen === 'events' ? 'Choose Game' : currentScreen === 'checkout' ? 'Payment' : 'Back'} />
+                <main className="pb-safe">
+                    {currentScreen === 'home' && <HomeScreen />}
+                    {currentScreen === 'events' && <EventListScreen />}
+                    {currentScreen === 'eventDetails' && <EventDetailScreen />}
+                    {currentScreen === 'checkout' && <CheckoutScreen />}
+                    {currentScreen === 'success' && <SuccessScreen />}
+                    {currentScreen === 'myTickets' && <MyTicketsScreen />}
+                    {currentScreen === 'aiHelp' && (
+                        <ChatScreen 
+                            chatHistory={chatHistory} 
+                            inputText={inputText} 
+                            setInputText={setInputText} 
+                            handleSendMessage={handleSendMessage} 
+                        />
+                    )}
+                    {currentScreen === 'guardian' && <GuardianScreen />}
+                </main>
+                <ConfirmModal />
+            </div>
+        );
+    }
+
+    const root = ReactDOM.createRoot(document.getElementById('root'));
+    root.render(<App />);
+
+</script>
+
+</body>
+</html>

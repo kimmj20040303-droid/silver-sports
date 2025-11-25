@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My AI Chatbot</title>
+    <style>
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background-color: #f0f2f5; display: flex; justify-content: center; height: 100vh; margin: 0; }
+        .chat-container { width: 100%; max-width: 600px; background: white; display: flex; flex-direction: column; box-shadow: 0 4px 10px rgba(0,0,0,0.1); height: 90vh; margin-top: 20px; border-radius: 10px; overflow: hidden; }
+        .chat-header { background: #0078ff; color: white; padding: 20px; text-align: center; font-size: 1.2rem; font-weight: bold; }
+        .chat-box { flex: 1; padding: 20px; overflow-y: auto; background: #e5ddd5; display: flex; flex-direction: column; gap: 10px; }
+        .message { padding: 10px 15px; border-radius: 20px; max-width: 70%; word-wrap: break-word; font-size: 0.95rem; line-height: 1.4; }
+        .user-message { align-self: flex-end; background-color: #0078ff; color: white; border-bottom-right-radius: 5px; }
+        .bot-message { align-self: flex-start; background-color: white; color: black; border-bottom-left-radius: 5px; box-shadow: 0 1px 2px rgba(0,0,0,0.1); }
+        .input-area { display: flex; padding: 10px; border-top: 1px solid #ddd; background: white; }
+        input { flex: 1; padding: 12px; border: 1px solid #ddd; border-radius: 20px; outline: none; font-size: 1rem; }
+        button { margin-left: 10px; padding: 10px 20px; background: #0078ff; color: white; border: none; border-radius: 20px; cursor: pointer; font-weight: bold; }
+        button:hover { background: #0056b3; }
+        button:disabled { background: #ccc; cursor: not-allowed; }
+        .typing { font-size: 0.8rem; color: #666; margin-left: 10px; display: none; }
+    </style>
+</head>
+<body>
+
+<div class="chat-container">
+    <div class="chat-header">My Chatbot</div>
+    <div class="chat-box" id="chatBox">
+        <div class="message bot-message">Hello! I am your AI assistant. How can I help you today?</div>
+    </div>
+    <div class="typing" id="typingIndicator">Bot is typing...</div>
+    <div class="input-area">
+        <input type="text" id="userInput" placeholder="Type a message..." onkeypress="handleEnter(event)">
+        <button onclick="sendMessage()" id="sendBtn">Send</button>
+    </div>
+</div>
+
+<script>
+    // Variables
+    let conversationId = 'new'; // Starts as 'new', updates after first message
+    const chatBox = document.getElementById('chatBox');
+    const userInput = document.getElementById('userInput');
+    const sendBtn = document.getElementById('sendBtn');
+    const typingIndicator = document.getElementById('typingIndicator');
+
+    // Handle Enter key
+    function handleEnter(e) {
+        if (e.key === 'Enter') sendMessage();
+    }
+
+    // Main Send Logic
+    async function sendMessage() {
+        const text = userInput.value.trim();
+        if (!text) return;
+
+        // 1. Add User Message to Screen
+        addMessage(text, 'user-message');
+        userInput.value = '';
+        sendBtn.disabled = true;
+        typingIndicator.style.display = 'block';
+
+        try {
+            // 2. Send to Backend
+            const response = await fetch(`/message/${conversationId}`, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ message: text })
+            });
+
+            if (!response.ok) throw new Error('Network response was not ok');
+
+            const data = await response.json();
+
+            // 3. Update Conversation ID (so the bot remembers context)
+            if (data.conversationId) {
+                conversationId = data.conversationId;
+            }
+
+            // 4. Add Bot Response to Screen
+            addMessage(data.response, 'bot-message');
+
+        } catch (error) {
+            addMessage("Error: Could not connect to the server.", 'bot-message');
+            console.error(error);
+        } finally {
+            sendBtn.disabled = false;
+            typingIndicator.style.display = 'none';
+        }
+    }
+
+    // Helper: Add bubble to screen
+    function addMessage(text, className) {
+        const div = document.createElement('div');
+        div.classList.add('message', className);
+        div.innerText = text;
+        chatBox.appendChild(div);
+        chatBox.scrollTop = chatBox.scrollHeight; // Auto-scroll to bottom
+    }
+</script>
+
+</body>
+</html>
