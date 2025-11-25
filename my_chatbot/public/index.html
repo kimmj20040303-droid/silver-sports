@@ -647,7 +647,7 @@
                 if (chatStep === 'idle' && option.value === 'book') { addChatMessage('ai', "What kind of event?"); setChatStep('picking_sport'); }
                 else if (chatStep === 'idle' && option.value === 'mytickets') { addChatMessage('ai', "Opening tickets..."); setCurrentScreen('myTickets'); }
                 else if (chatStep === 'picking_sport') {
-                    const matches = EVENTS_DATA.filter(e => e.type === option.value);
+                    const matches = EVENTS_DATA.filter(e => e.sport === option.value || e.type === option.value.toLowerCase());
                     addChatMessage('ai', `I found these ${option.label} events:`, 'text');
                     setChatHistory(prev => [...prev, { sender: 'ai', uiType: 'event_cards', data: matches }]);
                 }
