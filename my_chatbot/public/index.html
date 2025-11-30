@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Silver Sports</title>
+    <title>Emerging Tickets</title>
     
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
@@ -84,7 +84,8 @@
         Send: (p) => <Icon {...p} path={<><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></>} />,
         PlusCircle: (p) => <Icon {...p} path={<><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="16"/><line x1="8" y1="12" x2="16" y2="12"/></>} />,
         LogOut: (p) => <Icon {...p} path={<><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></>} />,
-        Settings: (p) => <Icon {...p} path={<><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"/></>} />,
+        // UPDATED: Normal Gear Icon (Not Crooked)
+        Settings: (p) => <Icon {...p} path={<><path d="M12.22 2h-.44a2 2 0 0 0-2 2v.18a2 2 0 0 1-1 1.73l-.43.25a2 2 0 0 1-2 0l-.15-.08a2 2 0 0 0-2.73.73l-.22.38a2 2 0 0 0 .73 2.73l.15.1a2 2 0 0 1 1 1.72v.51a2 2 0 0 1-1 1.74l-.15.09a2 2 0 0 0-.73 2.73l.22.38a2 2 0 0 0 2.73.73l.15-.08a2 2 0 0 1 2 0l.43.25a2 2 0 0 1 1 1.73V20a2 2 0 0 0 2 2h.44a2 2 0 0 0 2-2v-.18a2 2 0 0 1 1-1.73l.43-.25a2 2 0 0 1 2 0l.15.08a2 2 0 0 0 2.73-.73l.22-.39a2 2 0 0 0-.73-2.73l-.15-.09a2 2 0 0 1-1-1.74v-.47a2 2 0 0 1 1-1.74l.15-.09a2 2 0 0 0 .73-2.73l-.22-.39a2 2 0 0 0-2.73-.73l-.15.08a2 2 0 0 1-2 0l-.43-.25a2 2 0 0 1-1-1.73V4a2 2 0 0 0-2-2z"/><circle cx="12" cy="12" r="3"/></>} />,
         Trash2: (p) => <Icon {...p} path={<><polyline points="3 6 5 6 21 6"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/><line x1="10" y1="11" x2="10" y2="17"/><line x1="14" y1="11" x2="14" y2="17"/></>} />,
         Clock: (p) => <Icon {...p} path={<><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></>} />,
         Search: (p) => <Icon {...p} path={<><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></>} />,
@@ -92,18 +93,23 @@
         Store: (p) => <Icon {...p} path={<><path d="m2 7 4.41-4.41A2 2 0 0 1 7.83 2h8.34a2 2 0 0 1 1.42.59L22 7"/><path d="M4 12v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8"/><path d="M15 22v-4a2 2 0 0 0-2-2h-2a2 2 0 0 0-2 2v4"/><path d="M2 7h20"/><path d="M22 7v3a2 2 0 0 1-2 2v0a2.7 2.7 0 0 1-1.59-.63.7.7 0 0 0-.82 0A2.7 2.7 0 0 1 16 12a2.7 2.7 0 0 1-1.59-.63.7.7 0 0 0-.82 0A2.7 2.7 0 0 1 12 12a2.7 2.7 0 0 1-1.59-.63.7.7 0 0 0-.82 0A2.7 2.7 0 0 1 8 12a2.7 2.7 0 0 1-1.59-.63.7.7 0 0 0-.82 0A2.7 2.7 0 0 1 4 12v0a2 2 0 0 1-2-2V7"/></>} />,
         Grid: (p) => <Icon {...p} path={<><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></>} />,
         Shuffle: (p) => <Icon {...p} path={<><polyline points="16 3 21 3 21 8"/><line x1="4" y1="20" x2="21" y2="3"/><polyline points="21 16 21 21 16 21"/><line x1="15" y1="15" x2="21" y2="21"/><line x1="4" y1="4" x2="9" y2="9"/></>} />,
-        Coupons: (p) => <Icon {...p} path={<><path d="M2 9a3 3 0 0 1 0 6v2a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2v-2a3 3 0 0 1 0-6V7a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2z"/><path d="M9 12h6"/><path d="M12 9v6"/></>} />
+        Coupons: (p) => <Icon {...p} path={<><path d="M2 9a3 3 0 0 1 0 6v2a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2v-2a3 3 0 0 1 0-6V7a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2z"/><path d="M9 12h6"/><path d="M12 9v6"/></>} />,
+        Lock: (p) => <Icon {...p} path={<><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></>} />
     };
 
     // --- 2. DATA & CONFIG ---
     const INITIAL_DATA = {
         userProfile: { name: 'Kim', points: 1200 },
         myTickets: [],
-        myCoupons: [],
+        myCoupons: [
+            { id: 1, name: '$5 Off Ticket', cost: 500, code: 'SAVE5' },
+            { id: 2, name: 'Free Drink', cost: 200, code: 'DRINK1' }
+        ],
         isLinked: false,
         conversationId: 'new',
         chatHistory: [],
         settings: { largeText: false, highContrast: false, voiceEnabled: true },
+        isLoggedIn: false, // New Auth State
         groups: [
             { 
                 id: 1, name: 'Westside Walkers', members: 12, nextOuting: 'Baseball Game', nextOutingDate: new Date(Date.now() + 86400000).toISOString(), joined: false, createdByUser: false,
@@ -121,11 +127,15 @@
         ]
     };
 
+    // Updated Events Data - Removed NOL, Added More Events
     const EVENTS_DATA = [
         { id: 1, type: 'sport', sport: 'Baseball', team: 'City Tigers vs Bears', date: 'Tomorrow, 2:00 PM', price: 25, location: 'Central Stadium', source: 'Interpark' },
         { id: 2, type: 'sport', sport: 'Soccer', team: 'United FC vs City', date: 'Sunday, 4:00 PM', price: 30, location: 'North Field', source: 'Yes24' },
-        { id: 3, type: 'art', sport: 'Musical', team: 'The Lion King', date: 'Nov 12, 7:00 PM', price: 50, location: 'Grand Theater', source: 'NOL' },
         { id: 4, type: 'art', sport: 'Orchestra', team: 'Symphony Night', date: 'Dec 5, 6:00 PM', price: 40, location: 'City Hall', source: 'Interpark' },
+        { id: 5, type: 'sport', sport: 'Basketball', team: 'Knights vs Rockets', date: 'Friday, 7:00 PM', price: 45, location: 'City Arena', source: 'Yes24' },
+        { id: 6, type: 'art', sport: 'Concert', team: 'Jazz in the Park', date: 'Saturday, 5:00 PM', price: 20, location: 'Riverside Park', source: 'Interpark' },
+        { id: 7, type: 'sport', sport: 'Tennis', team: 'Grand Slam Final', date: 'Next Sat, 1:00 PM', price: 80, location: 'Open Court', source: 'Yes24' },
+        { id: 8, type: 'art', sport: 'Exhibition', team: 'Modern Art Expo', date: 'Daily, 10:00 AM', price: 15, location: 'City Museum', source: 'Interpark' },
     ];
 
     // --- 3. HOOKS ---
@@ -172,23 +182,96 @@
 
     // --- 5. SCREENS ---
 
-    const Header = ({ title, userProfile, goBack, showBack, settings, onToggleVoice, onSettings, onRewards, onCoupons }) => (
+    // NEW: LOGIN SCREEN REDESIGNED
+    const LoginScreen = ({ onLogin }) => {
+        const [id, setId] = React.useState('');
+        const [pin, setPin] = React.useState('');
+
+        const handleSubmit = () => {
+            if (id.trim().length > 0) {
+                onLogin(id);
+            }
+        };
+
+        return (
+            <div className="font-sans max-w-lg mx-auto bg-white min-h-screen shadow-2xl overflow-hidden relative flex flex-col justify-center p-6">
+                <div className="flex flex-col items-center mb-10">
+                    <div className="w-24 h-24 bg-blue-100 rounded-full flex items-center justify-center mb-6 shadow-sm">
+                        <Icons.Lock size={48} className="text-blue-500"/>
+                    </div>
+                    <h1 className="text-4xl font-extrabold text-slate-900 tracking-tight leading-tight mb-2">Emerging Tickets</h1>
+                    <p className="text-xl text-slate-500 font-medium">Your Gateway to Events</p>
+                </div>
+
+                <div className="space-y-6">
+                    <div>
+                        <label className="block text-slate-900 font-bold mb-2 text-md">Username / Phone Number</label>
+                        <input 
+                            type="text" 
+                            value={id} 
+                            onChange={(e) => setId(e.target.value)} 
+                            placeholder="Enter name or phone" 
+                            className="w-full bg-white border border-slate-300 rounded-xl py-4 px-4 text-lg outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-200 transition-all placeholder:text-slate-400"
+                        />
+                    </div>
+                    <div>
+                        <label className="block text-slate-900 font-bold mb-2 text-md">Password</label>
+                        <input 
+                            type="password" 
+                            value={pin} 
+                            onChange={(e) => setPin(e.target.value)} 
+                            placeholder="........" 
+                            className="w-full bg-white border border-slate-300 rounded-xl py-4 px-4 text-lg outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-200 transition-all placeholder:text-slate-400 tracking-widest"
+                        />
+                    </div>
+                    
+                    <button 
+                        onClick={handleSubmit} 
+                        disabled={!id}
+                        className={`w-full py-4 rounded-xl text-lg font-bold shadow-md mt-6 transition-all transform active:scale-[0.98] ${id ? 'bg-blue-600 text-white hover:bg-blue-700' : 'bg-slate-300 text-slate-500 cursor-not-allowed'}`}
+                    >
+                        Sign In
+                    </button>
+                </div>
+
+                <div className="mt-12 flex items-center justify-center gap-2 text-green-600 font-bold text-sm">
+                    <Icons.CheckCircle size={18} />
+                    <span>Linked with all Ticketing Platforms</span>
+                </div>
+            </div>
+        );
+    };
+
+    // UPDATED HEADER: Improved Spacing & Settings Text
+    const Header = ({ title, userProfile, goBack, showBack, settings, onToggleVoice, onSettings, onRewards, onCoupons, isHome }) => (
         <div className="bg-white sticky top-0 z-20 p-4 shadow-sm flex items-center justify-between border-b border-slate-200">
             <div className="flex items-center gap-3">
                 {showBack && <button onClick={goBack} className="bg-white p-3 rounded-xl border-2 border-slate-200 text-slate-700 active:bg-slate-100 hover:bg-slate-50 transition-colors"><Icons.ArrowLeft size={28} /></button>}
-                <h1 className="text-2xl font-extrabold text-slate-800 tracking-tight">{title}</h1>
+                {title && <h1 className="text-2xl font-extrabold text-slate-800 tracking-tight">{title}</h1>}
             </div>
-            <div className="flex gap-2">
-                <button onClick={onCoupons} className="hidden sm:flex items-center gap-1 bg-pink-50 px-4 py-1 rounded-full border border-pink-200 hover:bg-pink-100 active:scale-95 transition-transform cursor-pointer" title="My Coupons">
-                    <Icons.Ticket size={20} className="text-pink-600" />
+            
+            <div className={`flex items-center gap-3 overflow-x-auto no-scrollbar py-1 ${isHome ? 'w-full justify-between' : ''}`}>
+                 {/* 1. Coupons (Pink Pill) */}
+                <button onClick={onCoupons} className="flex-shrink-0 flex items-center gap-2 bg-pink-50 px-4 py-2 rounded-full border border-pink-200 hover:bg-pink-100 active:scale-95 transition-transform cursor-pointer shadow-sm">
+                    <Icons.Ticket size={22} className="text-pink-700" />
+                    <span className="font-bold text-pink-800">Coupons</span>
                 </button>
-                <button onClick={onRewards} className="hidden sm:flex items-center gap-1 bg-yellow-50 px-4 py-1 rounded-full border border-yellow-200 hover:bg-yellow-100 active:scale-95 transition-transform cursor-pointer">
-                    <Icons.Award size={20} className="text-yellow-600" />
-                    <span className="font-bold text-yellow-700">{userProfile.points}</span>
+
+                 {/* 2. Rewards (Yellow Pill) */}
+                <button onClick={onRewards} className="flex-shrink-0 flex items-center gap-2 bg-yellow-50 px-4 py-2 rounded-full border border-yellow-200 hover:bg-yellow-100 active:scale-95 transition-transform cursor-pointer shadow-sm">
+                    <Icons.Award size={22} className="text-yellow-700" />
+                    <span className="font-bold text-yellow-800">{userProfile.points}</span>
                 </button>
-                <button onClick={onSettings} className="p-3 rounded-full border-2 bg-slate-50 border-slate-200 text-slate-600 hover:bg-slate-100 active:scale-95 transition-transform"><Icons.Settings size={26} /></button>
-                <button onClick={onToggleVoice} className={`p-3 rounded-full border-2 transition-colors ${settings.voiceEnabled ? 'bg-blue-50 border-blue-200 text-blue-700' : 'bg-slate-50 border-slate-200 text-slate-400'}`}>
-                    {settings.voiceEnabled ? <Icons.Volume2 size={26} /> : <Icons.VolumeX size={26} />}
+
+                 {/* 3. Settings (Text Pill) - Changed from Icon Circle */}
+                <button onClick={onSettings} className="flex-shrink-0 flex items-center gap-2 bg-slate-50 px-4 py-2 rounded-full border border-slate-200 hover:bg-slate-100 active:scale-95 transition-transform cursor-pointer shadow-sm">
+                    <Icons.Settings size={22} className="text-slate-600" />
+                    <span className="font-bold text-slate-700">Settings</span>
+                </button>
+
+                 {/* 4. Sound (Blue Circle) */}
+                <button onClick={onToggleVoice} className={`flex-shrink-0 w-11 h-11 flex items-center justify-center rounded-full border-2 transition-colors active:scale-95 ${settings.voiceEnabled ? 'bg-blue-50 border-blue-200 text-blue-600' : 'bg-slate-50 border-slate-200 text-slate-400'}`}>
+                    {settings.voiceEnabled ? <Icons.Volume2 size={24} /> : <Icons.VolumeX size={24} />}
                 </button>
             </div>
         </div>
@@ -339,14 +422,17 @@
         );
     };
 
-    const SettingsScreen = ({ settings, userProfile, onUpdateSettings, onUpdateProfile, onClose }) => {
+    const SettingsScreen = ({ settings, userProfile, onUpdateSettings, onUpdateProfile, onClose, onLogout }) => {
         const [editName, setEditName] = React.useState(userProfile.name);
         return (
             <div className="p-6 bg-slate-50 min-h-screen animate-fade-in pb-32">
                 <h2 className="text-3xl font-bold text-slate-900 mb-6">Settings</h2>
                 <div className="bg-white rounded-2xl p-6 shadow-sm border border-slate-200 mb-6"><h3 className="text-xl font-bold text-slate-800 mb-4 flex items-center gap-2"><Icons.User className="text-blue-600"/> My Profile</h3><div className="space-y-4"><div><label className="block text-sm font-bold text-slate-500 mb-1">Display Name</label><div className="flex gap-2"><input type="text" value={editName} onChange={(e) => setEditName(e.target.value)} className="flex-1 p-3 border-2 border-slate-200 rounded-xl text-lg outline-none focus:border-blue-500" /><button onClick={() => onUpdateProfile({ ...userProfile, name: editName })} className="bg-blue-600 text-white px-4 rounded-xl font-bold">Save</button></div></div><div className="p-4 bg-yellow-50 rounded-xl border border-yellow-100 flex justify-between items-center"><span className="font-bold text-yellow-800">Reward Points</span><span className="text-2xl font-bold text-yellow-600">{userProfile.points}</span></div></div></div>
                 <div className="bg-white rounded-2xl p-6 shadow-sm border border-slate-200 space-y-6"><h3 className="text-xl font-bold text-slate-800 mb-2 flex items-center gap-2"><Icons.Settings className="text-slate-600"/> Appearance</h3><div className="flex justify-between items-center py-2 border-b border-slate-100"><div><div className="text-xl font-bold text-slate-800">Large Text Mode</div><div className="text-slate-500 text-sm">Makes everything bigger</div></div><button onClick={() => onUpdateSettings('largeText', !settings.largeText)} className={`w-16 h-9 rounded-full relative transition-colors ${settings.largeText ? 'bg-green-500' : 'bg-slate-200'}`}><div className={`w-7 h-7 bg-white rounded-full absolute top-1 shadow-md transition-all ${settings.largeText ? 'right-1' : 'left-1'}`}></div></button></div><div className="flex justify-between items-center py-2"><div><div className="text-xl font-bold text-slate-800">High Contrast</div><div className="text-slate-500 text-sm">Easier to read</div></div><button onClick={() => onUpdateSettings('highContrast', !settings.highContrast)} className={`w-16 h-9 rounded-full relative transition-colors ${settings.highContrast ? 'bg-green-500' : 'bg-slate-200'}`}><div className={`w-7 h-7 bg-white rounded-full absolute top-1 shadow-md transition-all ${settings.highContrast ? 'right-1' : 'left-1'}`}></div></button></div></div>
-                <div className="mt-8 space-y-4"><button onClick={() => { if(confirm('Clear chat history?')) onUpdateSettings('clearChat', true); }} className="w-full py-4 bg-white border-2 border-slate-200 text-slate-600 font-bold rounded-xl">Clear Chat History</button><button onClick={() => { if(confirm('Reset all app data?')) { localStorage.clear(); window.location.reload(); } }} className="w-full py-4 bg-red-50 text-red-600 border-2 border-red-100 font-bold rounded-xl">Reset App Data</button></div>
+                <div className="mt-8 space-y-4">
+                    <button onClick={() => { if(confirm('Clear chat history?')) onUpdateSettings('clearChat', true); }} className="w-full py-4 bg-white border-2 border-slate-200 text-slate-600 font-bold rounded-xl">Clear Chat History</button>
+                    <button onClick={onLogout} className="w-full py-4 bg-red-50 text-red-600 border-2 border-red-100 font-bold rounded-xl flex items-center justify-center gap-2"><Icons.LogOut size={20}/> Log Out</button>
+                </div>
                 <button onClick={onClose} className="w-full bg-slate-800 text-white text-2xl font-bold py-5 rounded-2xl mt-8 shadow-lg">Close Settings</button>
             </div>
         );
@@ -424,7 +510,8 @@
         </div>
     );
 
-    const MyTicketsScreen = ({ tickets, isLinked, onSend, onCancelSend }) => (
+    // Updated MyTicketsScreen to include Refund/Cancel
+    const MyTicketsScreen = ({ tickets, isLinked, onSend, onCancelSend, onRefund }) => (
         <div className="p-6 bg-slate-50 min-h-screen pb-20 animate-fade-in">
             {tickets.length === 0 ? (
                 <div className="text-center mt-20 opacity-60"><div className="bg-slate-200 w-24 h-24 rounded-full flex items-center justify-center mx-auto mb-4"><Icons.Ticket size={40} className="text-slate-400"/></div><p className="text-xl text-slate-500 font-medium">No tickets yet.</p></div>
@@ -437,17 +524,36 @@
                             <p className={`text-xl font-bold flex items-center gap-2 ${ticket.status.includes('Paid') ? 'text-green-600' : ticket.status.includes('Request') ? 'text-pink-600' : 'text-orange-600'}`}>{ticket.status.includes('Paid') && <Icons.CheckCircle size={24}/>}{ticket.isGift ? 'Sent to Guardian' : ticket.status}</p>
                             {ticket.seats && <div className="mt-2 text-sm text-slate-500">Seats: {ticket.seats.join(', ')}</div>}
                         </div>
-                        {isLinked && (<div className="ml-4">{!ticket.isGift ? (<button onClick={() => onSend(ticket.purchaseId)} className="w-full py-4 bg-white border-2 border-slate-200 text-slate-700 font-bold rounded-xl flex items-center justify-center gap-2 text-xl hover:bg-slate-50 active:scale-[0.99] transition-transform"><Icons.Send size={24} /> Send to Family</button>) : (<button onClick={() => onCancelSend(ticket.purchaseId)} className="w-full py-4 bg-pink-50 border-2 border-pink-100 text-pink-700 font-bold rounded-xl flex items-center justify-center gap-2 text-xl hover:bg-pink-100 active:scale-[0.99]"><Icons.LogOut size={24} /> Cancel Sending</button>)}</div>)}
+                        
+                        <div className="ml-4 space-y-3">
+                            {/* Send to Family / Cancel Sending */}
+                            {isLinked && (
+                                <div>
+                                    {!ticket.isGift ? (
+                                        <button onClick={() => onSend(ticket.purchaseId)} className="w-full py-3 bg-white border-2 border-slate-200 text-slate-700 font-bold rounded-xl flex items-center justify-center gap-2 text-lg hover:bg-slate-50 active:scale-[0.99] transition-transform"><Icons.Send size={20} /> Send to Family</button>
+                                    ) : (
+                                        <button onClick={() => onCancelSend(ticket.purchaseId)} className="w-full py-3 bg-pink-50 border-2 border-pink-100 text-pink-700 font-bold rounded-xl flex items-center justify-center gap-2 text-lg hover:bg-pink-100 active:scale-[0.99]"><Icons.LogOut size={20} /> Cancel Sending</button>
+                                    )}
+                                </div>
+                            )}
+
+                            {/* Refund Button */}
+                            <button onClick={() => onRefund(ticket.purchaseId)} className="w-full py-3 bg-red-50 border-2 border-red-100 text-red-600 font-bold rounded-xl flex items-center justify-center gap-2 text-lg hover:bg-red-100 active:scale-[0.99]">
+                                <Icons.XCircle size={20} /> Refund Ticket
+                            </button>
+                        </div>
                     </div>
                 ))
             )}
         </div>
     );
 
-    const ManualBookingFlow = ({ screen, events, selectedEvent, ticketCount, paymentMethod, userProfile, selectedSeats, onSelectEvent, onTicketChange, onPaymentMethod, onPurchase, onConfirmSeats, navigate }) => {
+    const ManualBookingFlow = ({ screen, events, selectedEvent, ticketCount, paymentMethod, userProfile, selectedSeats, onSelectEvent, onTicketChange, onPaymentMethod, onPurchase, onConfirmSeats, navigate, myCoupons }) => {
         const [category, setCategory] = React.useState('all');
         const [usePoints, setUsePoints] = React.useState(false);
-        const [searchQuery, setSearchQuery] = React.useState(''); // New Search State
+        const [searchQuery, setSearchQuery] = React.useState(''); 
+        const [couponCode, setCouponCode] = React.useState('');
+        const [discountAmount, setDiscountAmount] = React.useState(0);
 
         const filteredEvents = events.filter(e => {
             const matchCategory = category === 'all' || e.type === category;
@@ -456,10 +562,28 @@
         });
 
         const subtotal = selectedEvent ? selectedEvent.price * ticketCount : 0;
-        const maxDiscount = Math.min(subtotal, Math.floor(userProfile.points / 100));
-        const discount = usePoints ? maxDiscount : 0;
-        const total = subtotal - discount;
-        const pointsCost = discount * 100;
+        const maxPointsDiscount = Math.min(subtotal, Math.floor(userProfile.points / 100));
+        const pointsDiscount = usePoints ? maxPointsDiscount : 0;
+        const total = Math.max(0, subtotal - pointsDiscount - discountAmount);
+        const pointsCost = pointsDiscount * 100;
+
+        const handleApplyCoupon = () => {
+            // Check provided codes against known coupons
+            // Using existing coupons in initial data for validation or just simple logic
+            const validCoupons = {
+                'SAVE5': 5,
+                'DRINK1': 2, 
+                'VIPUP': 10
+            };
+            
+            if (validCoupons[couponCode]) {
+                setDiscountAmount(validCoupons[couponCode]);
+                alert(`Coupon applied: $${validCoupons[couponCode]} Off`);
+            } else {
+                setDiscountAmount(0);
+                alert("Invalid Coupon Code");
+            }
+        };
 
         if (screen === 'events') {
             return (
@@ -512,8 +636,37 @@
                     <div className="mb-6 bg-white p-6 rounded-3xl border border-slate-200 shadow-sm">
                         <div className="flex justify-between items-center mb-4"><span className="text-xl text-slate-600">Subtotal</span><span className="text-2xl font-bold text-slate-900">${subtotal}</span></div>
                         {selectedSeats.length > 0 && <div className="mb-4 text-sm text-slate-500">Seats: {selectedSeats.join(', ')}</div>}
-                        {userProfile.points >= 100 && (<div className="flex justify-between items-center py-4 border-t border-slate-100"><div><div className="text-lg font-bold text-slate-800 flex items-center gap-2"><Icons.Sparkles size={20} className="text-yellow-500"/> Use Points</div><div className="text-slate-500">Available: {userProfile.points} (Save ${Math.floor(userProfile.points/100)})</div></div><button onClick={() => setUsePoints(!usePoints)} className={`w-16 h-9 rounded-full relative transition-colors ${usePoints ? 'bg-green-500' : 'bg-slate-300'}`}><div className={`w-7 h-7 bg-white rounded-full absolute top-1 shadow-md transition-all ${usePoints ? 'right-1' : 'left-1'}`}></div></button></div>)}
-                        {usePoints && (<div className="flex justify-between items-center text-green-600 font-bold mb-2 text-xl"><span>Discount</span><span>-${discount}</span></div>)}
+                        
+                        {/* New Coupon Section */}
+                        <div className="py-4 border-t border-slate-100">
+                            <label className="text-slate-900 font-bold mb-2 block">Have a Coupon?</label>
+                            <div className="flex">
+                                <input 
+                                    type="text" 
+                                    value={couponCode} 
+                                    onChange={(e) => setCouponCode(e.target.value.toUpperCase())}
+                                    placeholder="ENTER CODE" 
+                                    className="w-full p-3 border-2 border-r-0 border-slate-200 rounded-l-xl text-lg outline-none focus:border-blue-500 bg-white"
+                                />
+                                <button onClick={handleApplyCoupon} className="bg-slate-900 text-white px-6 rounded-r-xl font-bold hover:bg-slate-800">Apply</button>
+                            </div>
+                            {discountAmount > 0 && <div className="text-green-600 font-bold mt-2">Coupon Applied: -${discountAmount}</div>}
+                        </div>
+
+                        {/* Updated Points Section with Toggle Look */}
+                        {userProfile.points >= 100 && (
+                            <div className="flex justify-between items-center py-4 border-t border-slate-100">
+                                <div>
+                                    <div className="text-lg font-bold text-slate-800 flex items-center gap-2"><Icons.Sparkles size={20} className="text-yellow-500"/> Use Points</div>
+                                    <div className="text-slate-500">Available: {userProfile.points} (Save ${Math.floor(userProfile.points/100)})</div>
+                                </div>
+                                <button onClick={() => setUsePoints(!usePoints)} className={`w-14 h-8 rounded-full relative transition-colors duration-300 ${usePoints ? 'bg-blue-600' : 'bg-slate-200'}`}>
+                                    <div className={`w-6 h-6 bg-white rounded-full absolute top-1 shadow-md transition-all duration-300 ${usePoints ? 'left-7' : 'left-1'}`}></div>
+                                </button>
+                            </div>
+                        )}
+                        {usePoints && (<div className="flex justify-between items-center text-green-600 font-bold mb-2 text-xl"><span>Points Discount</span><span>-${pointsDiscount}</span></div>)}
+                        
                         <div className="flex justify-between items-center mt-4 pt-4 border-t-2 border-slate-100"><span className="text-2xl font-bold text-slate-800">Total</span><span className="text-5xl font-extrabold text-blue-800">${total}</span></div>
                     </div>
                     <h3 className="text-xl font-bold text-slate-800 mb-4">Payment Method</h3>
@@ -545,6 +698,9 @@
         const [settings, setSettings] = usePersistentState('settings', INITIAL_DATA.settings);
         const [chatHistory, setChatHistory] = usePersistentState('chatHistory', INITIAL_DATA.chatHistory);
         const [rewards, setRewards] = usePersistentState('rewards', INITIAL_DATA.rewards);
+        
+        // Auth State
+        const [isLoggedIn, setIsLoggedIn] = usePersistentState('isLoggedIn', INITIAL_DATA.isLoggedIn);
         
         // Session State
         const [currentScreen, setCurrentScreen] = React.useState('home');
@@ -580,6 +736,18 @@
         const navigate = (screen) => { setCurrentScreen(screen); speak(screen === 'home' ? "Home" : screen); };
 
         // Handlers
+        const handleLogin = (name) => {
+            setUserProfile(prev => ({ ...prev, name }));
+            setIsLoggedIn(true);
+            speak(`Welcome back, ${name}`);
+        };
+
+        const handleLogout = () => {
+            setIsLoggedIn(false);
+            setShowSettings(false);
+            setCurrentScreen('home');
+        };
+
         const onSelectEvent = (e) => { setSelectedEvent(e); setCurrentScreen('eventDetails'); speak(e.team); };
         const onConfirmSeats = (seats) => { setSelectedSeats(seats); speak(`Selected ${seats.join(', ')}`); };
         const handlePreparePurchase = (total, pointsCost) => { setPurchaseDetails({ total, pointsCost }); setShowConfirmModal(true); speak("Please confirm."); };
@@ -594,6 +762,15 @@
             setShowConfirmModal(false); setCurrentScreen('success'); notify("Ticket Purchased!"); speak("Success! Ticket added.");
             // Reset flow
             setSelectedSeats([]); setTicketCount(1); setPaymentMethod(null);
+        };
+
+        // Refund Handler
+        const handleRefund = (ticketId) => {
+            if(confirm("Are you sure you want to refund this ticket?")) {
+                setMyTickets(prev => prev.filter(t => t.purchaseId !== ticketId));
+                notify("Ticket Refunded Successfully", 'success');
+                speak("Ticket refunded.");
+            }
         };
 
         const handleAddComment = (groupId, text) => {
@@ -693,13 +870,18 @@
             }, 500);
         };
 
+        // Logic Check: Show Login First
+        if (!isLoggedIn) {
+            return <LoginScreen onLogin={handleLogin} />;
+        }
+
         // Render logic
-        if (showSettings) return <SettingsScreen settings={settings} userProfile={userProfile} onUpdateSettings={(k, v) => { if (k === 'clearChat') { setChatHistory([]); notify("Chat Cleared"); return; } setSettings(prev => ({ ...prev, [k]: v })); }} onUpdateProfile={setUserProfile} onClose={() => setShowSettings(false)} />;
+        if (showSettings) return <SettingsScreen settings={settings} userProfile={userProfile} onUpdateSettings={(k, v) => { if (k === 'clearChat') { setChatHistory([]); notify("Chat Cleared"); return; } setSettings(prev => ({ ...prev, [k]: v })); }} onUpdateProfile={setUserProfile} onClose={() => setShowSettings(false)} onLogout={handleLogout} />;
 
         return (
             <div className="font-sans max-w-lg mx-auto bg-slate-50 min-h-screen shadow-2xl overflow-hidden relative selection:bg-blue-100">
                 <Header 
-                    title={currentScreen === 'home' ? 'Silver Sports' : currentScreen === 'aiHelp' ? 'Assistant' : currentScreen === 'seats' ? 'Seat Map' : 'Back'} 
+                    title={currentScreen === 'home' ? '' : currentScreen === 'aiHelp' ? 'Assistant' : currentScreen === 'seats' ? 'Seat Map' : 'Back'} 
                     userProfile={userProfile} 
                     goBack={() => { 
                         if (currentScreen === 'communityDetail') setCurrentScreen('community');
@@ -714,12 +896,13 @@
                     onSettings={() => setShowSettings(true)} 
                     onRewards={() => setCurrentScreen('rewards')}
                     onCoupons={() => setCurrentScreen('coupons')}
+                    isHome={currentScreen === 'home'}
                 />
                 <main className="pb-safe">
                     {currentScreen === 'home' && <HomeScreen userProfile={userProfile} navigate={navigate} />}
                     {(currentScreen === 'events' || currentScreen === 'eventDetails' || currentScreen === 'seats' || currentScreen === 'checkout') && 
                         <ManualBookingFlow 
-                            screen={currentScreen} events={EVENTS_DATA} selectedEvent={selectedEvent} ticketCount={ticketCount} paymentMethod={paymentMethod} userProfile={userProfile} selectedSeats={selectedSeats}
+                            screen={currentScreen} events={EVENTS_DATA} selectedEvent={selectedEvent} ticketCount={ticketCount} paymentMethod={paymentMethod} userProfile={userProfile} selectedSeats={selectedSeats} myCoupons={myCoupons}
                             onSelectEvent={onSelectEvent} onTicketChange={(d) => setTicketCount(Math.max(1, ticketCount + d))} onConfirmSeats={onConfirmSeats} onPaymentMethod={setPaymentMethod} onPurchase={handlePreparePurchase} navigate={navigate} 
                         />
                     }
@@ -727,7 +910,7 @@
                     {currentScreen === 'community' && <CommunityScreen groups={groups} onJoin={handleJoinGroup} onLeave={handleLeaveGroup} onDelete={handleDeleteGroup} onCreate={handleCreateGroup} onOpen={(g) => { setCurrentGroup(g); setCurrentScreen('communityDetail'); }} />}
                     {currentScreen === 'communityDetail' && <CommunityDetailScreen group={currentGroup} onLeave={(id) => { handleLeaveGroup(id); setCurrentScreen('community'); }} onAddComment={handleAddComment} />}
                     {currentScreen === 'guardian' && <div className="p-6 text-center animate-fade-in"><div className="bg-white p-8 rounded-3xl shadow-sm border border-slate-200 mb-8"><div className="w-24 h-24 bg-slate-100 rounded-full flex items-center justify-center mx-auto mb-4"><Icons.Users size={40} className="text-slate-500" /></div><h2 className="text-3xl font-bold text-slate-900 mb-2">{isLinked ? "Sarah (Linked)" : "Connect Family"}</h2><p className="text-xl text-slate-500">{isLinked ? "Account is linked. You can share tickets instantly." : "Link accounts to send tickets easily."}</p></div>{!isLinked ? <button onClick={handleGuardianLink} className="w-full bg-blue-700 text-white py-5 rounded-2xl text-2xl font-bold shadow-lg hover:bg-blue-800 transition-colors">Link Account</button> : <div className="bg-green-100 p-6 rounded-2xl text-green-800 font-bold text-2xl flex items-center justify-center gap-2"><Icons.CheckCircle size={28}/> Active Connection</div>}</div>}
-                    {currentScreen === 'myTickets' && <MyTicketsScreen tickets={myTickets} isLinked={isLinked} onSend={handleSendTicket} onCancelSend={handleCancelSend} />}
+                    {currentScreen === 'myTickets' && <MyTicketsScreen tickets={myTickets} isLinked={isLinked} onSend={handleSendTicket} onCancelSend={handleCancelSend} onRefund={handleRefund} />}
                     {currentScreen === 'rewards' && <RewardShopScreen userProfile={userProfile} rewards={rewards} onRedeem={handleRedeem} />}
                     {currentScreen === 'coupons' && <MyCouponsScreen coupons={myCoupons} />}
                     {currentScreen === 'success' && <div className="p-6 text-center pt-32 animate-fade-in"><div className="inline-block p-6 bg-green-100 rounded-full mb-6"><Icons.CheckCircle size={60} className="text-green-600"/></div><h2 className="text-4xl font-extrabold text-slate-900 mb-8">Success!</h2><button onClick={() => setCurrentScreen('home')} className="w-full bg-slate-800 text-white py-5 rounded-2xl text-2xl font-bold shadow-lg">Go Home</button></div>}
